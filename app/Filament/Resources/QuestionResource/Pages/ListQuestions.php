@@ -15,7 +15,14 @@ class ListQuestions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            Actions\CreateAction::make(),
+            Actions\Action::make('reset-team')
+                ->action(fn() => Question::query()->update(['team_id' => null]))
+                ->color('danger')
+                ->requiresConfirmation()
+                ->modalHeading('Reset All Teams')
+                ->modalDescription('Are you sure you want to reset all questions\' teams? This action cannot be undone.')
+                ->modalSubmitActionLabel('Yes, reset all'),
         ];
     }
 }
