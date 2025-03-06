@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/match', [MatchGameController::class, 'index'])->name('index');
+Route::get('/checking', [MatchGameController::class, 'checking'])->name('checking');

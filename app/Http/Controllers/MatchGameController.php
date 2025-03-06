@@ -23,6 +23,11 @@ class MatchGameController extends Controller
         ]);
     }
 
+    public function checking(){
+        $matchGame = MatchGame::latest()->first();
+        return response()->json($matchGame);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
