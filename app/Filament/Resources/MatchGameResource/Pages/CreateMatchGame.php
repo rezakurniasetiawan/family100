@@ -30,6 +30,7 @@ class CreateMatchGame extends CreateRecord
         if ($questionId != null) {
             $updateQuestion = [
                 'team_id' => $teamId,
+                'answered' => 1,
             ];
             Question::where('id', $questionId)->update($updateQuestion);
 
