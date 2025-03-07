@@ -17,7 +17,7 @@ class ListQuestions extends ListRecords
         return [
             Actions\CreateAction::make(),
             Actions\Action::make('reset-team')
-                ->action(fn() => Question::query()->update(['team_id' => null]))
+                ->action(fn() => Question::query()->update(['team_id' => null, 'answered' => 0]))
                 ->color('danger')
                 ->requiresConfirmation()
                 ->modalHeading('Reset All Teams')
