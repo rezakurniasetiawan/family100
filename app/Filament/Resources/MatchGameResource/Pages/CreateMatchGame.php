@@ -47,7 +47,7 @@ class CreateMatchGame extends CreateRecord
         }else{
             $updateMatchGame = [
                 'information' => 'Question not answered',
-                'answered' => 1,
+                'answered' => 0,
             ];
             MatchGame::where('id', $data->id)->update($updateMatchGame);
         }
