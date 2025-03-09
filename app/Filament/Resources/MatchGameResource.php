@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MatchGameResource\Pages;
 use App\Filament\Resources\MatchGameResource\RelationManagers;
+use App\Models\Answer;
 use App\Models\MatchGame;
+use App\Models\Question;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -36,8 +38,20 @@ class MatchGameResource extends Resource
                             ->relationship('team', 'team_name')
                             ->required(),
                         Forms\Components\Select::make('question_id')
-                            ->label('Answer')
-                            ->relationship('question', 'answer')
+                            ->label('Question')
+                            ->relationship('question', 'question')
+                            ->searchable()
+                            ->preload()
+                            ->live()
+                            ->required(),
+                        Forms\Components\Select::make('answered')
+                            ->label('Answered')
+                            ->searchable()
+                            ->preload()
+                            ->options(fn(callable $get) => Answer::where('question_id', $get('question_id'))
+                            ->pluck('answer', 'id')
+                        )
+
                     ]),
 
             ]);

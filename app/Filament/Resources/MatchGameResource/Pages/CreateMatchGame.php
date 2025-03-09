@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\MatchGame;
 use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\MatchGameResource;
+use App\Models\Answer;
 
 class CreateMatchGame extends CreateRecord
 {
@@ -24,7 +25,7 @@ class CreateMatchGame extends CreateRecord
         $teamId = $data->team_id;
         $questionId = $data->question_id;
 
-        $question = Question::where('id', $questionId)->first();
+        $answer = Answer::where('id', $questionId)->first();
         $teams = Team::where('id', $teamId)->first();
 
         if ($questionId != null) {
@@ -32,10 +33,10 @@ class CreateMatchGame extends CreateRecord
                 'team_id' => $teamId,
                 'answered' => 1,
             ];
-            Question::where('id', $questionId)->update($updateQuestion);
+            Answer::where('id', $questionId)->update($updateQuestion);
 
             $updateTeam = [
-                'score' => $teams->score + $question->points,
+                'score' => $teams->score + $answer->points,
             ];
             Team::where('id', $teamId)->update($updateTeam);
 

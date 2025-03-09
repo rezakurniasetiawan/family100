@@ -17,8 +17,10 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Admin',
-            'email' => 'wcuofficial@gmail.com',
-            'password' => bcrypt('4ku4n4kindonesi4'),
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
+            // 'email' => 'wcuofficial@gmail.com',
+            // 'password' => bcrypt('4ku4n4kindonesi4'),
         ]);
 
         // create teams
@@ -35,18 +37,18 @@ class DatabaseSeeder extends Seeder
 
         // create questions
         $questions = [
-            ['question' => 'What is the capital of Nigeria?', 'answer' => 'Abuja', 'points' => 10],
-            ['question' => 'What is the capital of Ghana?', 'answer' => 'Accra', 'points' => 20],
-            ['question' => 'What is the capital of South Africa?', 'answer' => 'Pretoria', 'points' => 30],
-            ['question' => 'What is the capital of Kenya?', 'answer' => 'Nairobi', 'points' => 40],
-            ['question' => 'What is the capital of Egypt?', 'answer' => 'Cairo', 'points' => 50],
-            ['question' => 'What is the capital of Canada?', 'answer' => 'Ottawa', 'points' => 60],
-            ['question' => 'What is the capital of Brazil?', 'answer' => 'Brasilia', 'points' => 70],
-            ['question' => 'What is the capital of Japan?', 'answer' => 'Tokyo', 'points' => 80],
-            ['question' => 'What is the capital of France?', 'answer' => 'Paris', 'points' => 90],
-            ['question' => 'What is the capital of Australia?', 'answer' => 'Canberra', 'points' => 100],
+            ['question' => 'What is the capital of Nigeria?'],
+            ['question' => 'What is the capital of Ghana?'],
+            ['question' => 'What is the capital of South Africa?'],
+            ['question' => 'What is the capital of Kenya?'],
+            ['question' => 'What is the capital of Egypt?'],
+            ['question' => 'What is the capital of Canada?'],
+            ['question' => 'What is the capital of Brazil?'],
+            ['question' => 'What is the capital of Japan?'],
+            ['question' => 'What is the capital of France?'],
+            ['question' => 'What is the capital of Australia?'],
         ];
-        
+
 
         foreach ($questions as $question) {
             \App\Models\Question::create($question);

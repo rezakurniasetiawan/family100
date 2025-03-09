@@ -35,14 +35,7 @@ class QuestionResource extends Resource
                         Forms\Components\Textarea::make('question')
                             ->label('Question')
                             ->required(),
-                        Forms\Components\TextInput::make('answer')
-                            ->label('Answer')
-                            ->required(),
                     ]),
-                Forms\Components\TextInput::make('points')
-                    ->label('points')
-                    ->default(0)
-                    ->numeric()
             ]);
     }
 
@@ -54,15 +47,6 @@ class QuestionResource extends Resource
                 Tables\Columns\TextColumn::make('question')
                     ->searchable()
                     ->limit(20)
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('answer')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('points')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('team.team_name')
-                    ->searchable()
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
@@ -82,7 +66,7 @@ class QuestionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'answerd' => RelationManagers\AnswerRelationManager::class,
         ];
     }
 

@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable = ['question', 'answer', 'points', 'team_id', 'answered'];
+    protected $fillable = ['question'];
 
-    public function team()
+    public function Answer()
     {
-        return $this->belongsTo(Team::class);
+        return $this->hasMany(Answer::class);
     }
+    
 }
