@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MatchGame extends Model
 {
-    protected $fillable = ['team_id'];
+    protected $fillable = ['team_id','answered'];
 
     public function team()
     {

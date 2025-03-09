@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('team_id')->constrained('teams');
             $table->foreignId('question_id')->nullable()->constrained('questions');
             $table->string('information')->nullable();
+            $table->integer('answered')->default(0);
             $table->timestamps();
         });
     }
