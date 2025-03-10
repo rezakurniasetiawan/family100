@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Team;
 use App\Models\Question;
 use App\Models\MatchGame;
@@ -12,51 +13,38 @@ class MatchGameController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function general($id)
     {
         $teams = Team::get();
-        $questions = Question::get();
+        $answers = Answer::where('question_id', $id)->get();
 
         return response()->json([
             'teams' => $teams,
-            'questions' => $questions
+            'answers' => $answers,
         ]);
     }
 
-    public function checking(){
+    public function checking()
+    {
         $matchGame = MatchGame::latest()->first();
         return response()->json($matchGame);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function rangking()
     {
-        //
+        $teams = Team::orderBy('score', 'desc')->get();
+        return response()->json([
+            'teams' => $teams,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function segment()
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $questions = Question::join('segments', 'questions.segment_id', '=', 'segments.id')
+            ->select('questions.*', 'segments.segment_name as segment_name')
+            ->get();
+        return response()->json([
+            'questions' => $questions,
+        ]);
     }
 }

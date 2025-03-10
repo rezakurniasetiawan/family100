@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MatchGame extends Model
 {
-    protected $fillable = ['team_id','answered'];
+    protected $fillable = ['team_id', 'answer_id', 'question_id', 'answered'];
 
     public function team()
     {
@@ -17,5 +17,9 @@ class MatchGame extends Model
     {
         return $this->belongsTo(Question::class);
     }
-    
+
+    public function answer()
+    {
+        return $this->belongsTo(Answer::class);
+    }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('team_id')->constrained('teams');
             $table->foreignId('question_id')->nullable()->constrained('questions');
+            $table->foreignId('answer_id')->nullable()->constrained('answers');
             $table->string('information')->nullable();
             $table->integer('answered')->default(0);
             $table->timestamps();

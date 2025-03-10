@@ -8,5 +8,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/match', [MatchGameController::class, 'index'])->name('index');
+Route::get('/general/{id}', [MatchGameController::class, 'general'])->name('general');
 Route::get('/checking', [MatchGameController::class, 'checking'])->name('checking');
+Route::get('/rangking', [MatchGameController::class, 'rangking'])->name('rangking');
+Route::get('/segment', [MatchGameController::class, 'segment'])->name('segment');

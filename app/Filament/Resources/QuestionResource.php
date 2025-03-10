@@ -30,10 +30,14 @@ class QuestionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Master')
+                Forms\Components\Fieldset::make('Master')
                     ->schema([
                         Forms\Components\Textarea::make('question')
                             ->label('Question')
+                            ->required(),
+                        Forms\Components\Select::make('segment_id')
+                            ->label('Segment')
+                            ->relationship('segment', 'segment_name')
                             ->required(),
                     ]),
             ]);
@@ -46,7 +50,11 @@ class QuestionResource extends Resource
 
                 Tables\Columns\TextColumn::make('question')
                     ->searchable()
-                    ->limit(20)
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('segment.segment_name')
+                    ->label('Segment')
+                    ->searchable()
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')

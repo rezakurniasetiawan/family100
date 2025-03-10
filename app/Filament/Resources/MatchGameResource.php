@@ -44,13 +44,13 @@ class MatchGameResource extends Resource
                             ->preload()
                             ->live()
                             ->required(),
-                        Forms\Components\Select::make('answered')
+                        Forms\Components\Select::make('answer_id')
                             ->label('Answered')
                             ->searchable()
                             ->preload()
-                            ->options(fn(callable $get) => Answer::where('question_id', $get('question_id'))
-                            ->pluck('answer', 'id')
-                        )
+                            ->options(
+                                fn(callable $get) => Answer::where('question_id', $get('question_id'))->whereNull('team_id')->get()->pluck('answer', 'id')
+                            ),
 
                     ]),
 
@@ -68,13 +68,14 @@ class MatchGameResource extends Resource
                     ->label('Keterangan')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('answer.answer')
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -95,7 +96,7 @@ class MatchGameResource extends Resource
         return [
             'index' => Pages\ListMatchGames::route('/'),
             'create' => Pages\CreateMatchGame::route('/create'),
-            'edit' => Pages\EditMatchGame::route('/{record}/edit'),
+            // 'edit' => Pages\EditMatchGame::route('/{record}/edit'),
         ];
     }
 }

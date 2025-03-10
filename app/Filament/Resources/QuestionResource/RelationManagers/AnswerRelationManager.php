@@ -35,7 +35,7 @@ class AnswerRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('answer'),
                 Tables\Columns\TextColumn::make('points'),
-                Tables\Columns\TextColumn::make('team.name')
+                Tables\Columns\TextColumn::make('team.team_name')
                     ->label('Team'),
 
             ])

@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
 
         // create questions
         $questions = [
+            // tambhakan segment_id
             ['question' => 'What is the capital of Nigeria?'],
             ['question' => 'What is the capital of Ghana?'],
             ['question' => 'What is the capital of South Africa?'],
@@ -52,6 +53,25 @@ class DatabaseSeeder extends Seeder
 
         foreach ($questions as $question) {
             \App\Models\Question::create($question);
+        }
+
+
+        //Segment
+        $segments = [
+            ['segment_name' => 'Segment 1'],
+            ['segment_name' => 'Segment 2'],
+            ['segment_name' => 'Segment 3'],
+            ['segment_name' => 'Segment 4'],
+            ['segment_name' => 'Segment 5'],
+            ['segment_name' => 'Segment 6'],
+            ['segment_name' => 'Segment 7'],
+            ['segment_name' => 'Segment 8'],
+            ['segment_name' => 'Segment 9'],
+            ['segment_name' => 'Segment 10'],
+        ];
+
+        foreach ($segments as $segment) {
+            \App\Models\Segment::create($segment);
         }
     }
 }

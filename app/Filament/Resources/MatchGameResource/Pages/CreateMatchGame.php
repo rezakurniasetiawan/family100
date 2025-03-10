@@ -23,17 +23,17 @@ class CreateMatchGame extends CreateRecord
     {
         $data = $this->record;
         $teamId = $data->team_id;
-        $questionId = $data->question_id;
+        $answerId = $data->answer_id;
 
-        $answer = Answer::where('id', $questionId)->first();
+        $answer = Answer::where('id', $answerId)->first();
         $teams = Team::where('id', $teamId)->first();
 
-        if ($questionId != null) {
+        if ($answerId != null) {
             $updateQuestion = [
                 'team_id' => $teamId,
                 'answered' => 1,
             ];
-            Answer::where('id', $questionId)->update($updateQuestion);
+            Answer::where('id', $answerId)->update($updateQuestion);
 
             $updateTeam = [
                 'score' => $teams->score + $answer->points,

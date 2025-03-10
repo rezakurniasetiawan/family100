@@ -3,58 +3,43 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
-use App\Models\Team;
 use Filament\Tables;
+use App\Models\Segment;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\Layout\Stack;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\TeamResource\Pages;
+use App\Filament\Resources\SegmentResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\TeamResource\RelationManagers;
+use App\Filament\Resources\SegmentResource\RelationManagers;
 
-class TeamResource extends Resource
+class SegmentResource extends Resource
 {
-    protected static ?string $model = Team::class;
+    protected static ?string $model = Segment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+
     protected static ?string $navigationGroup = 'Master';
 
-    public static function getNavigationSort(): ?int
-    {
-        return 1;
-    }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('team_name')
-                    ->label('Team Name')
+                Forms\Components\TextInput::make('segment_name')
+                    ->label('Segment Name')
                     ->required(),
-                Forms\Components\TextInput::make('score')
-                    ->label('Score')
-                    ->numeric()
-                    ->disabled()
-                    ->default(0),
             ]);
     }
-
 
     public static function table(Table $table): Table
     {
         return $table
-            // ->columns([])
             ->columns([
                 Stack::make([
-                    Tables\Columns\TextColumn::make('team_name')
+                    Tables\Columns\TextColumn::make('segment_name')
                         ->searchable()
-                        ->sortable(),
-                    Tables\Columns\TextColumn::make('score')
-                        ->searchable()
-                        ->badge()
-                        ->color('primary')
                         ->sortable(),
                 ]),
             ])
@@ -65,7 +50,6 @@ class TeamResource extends Resource
             ->filters([
                 //
             ])
-            ->defaultSort('created_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
@@ -86,9 +70,9 @@ class TeamResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTeams::route('/'),
-            'create' => Pages\CreateTeam::route('/create'),
-            'edit' => Pages\EditTeam::route('/{record}/edit'),
+            'index' => Pages\ListSegments::route('/'),
+            'create' => Pages\CreateSegment::route('/create'),
+            'edit' => Pages\EditSegment::route('/{record}/edit'),
         ];
     }
 }

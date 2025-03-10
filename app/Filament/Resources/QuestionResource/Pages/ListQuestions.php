@@ -16,12 +16,12 @@ class ListQuestions extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
-            Actions\Action::make('reset-team')
-                ->action(fn() => Question::query()->update(['team_id' => null, 'answered' => 0]))
+            Actions\Action::make('delete-all')
+                ->action(fn() => Question::query()->delete())
                 ->color('danger')
                 ->requiresConfirmation()
-                ->modalHeading('Reset All Teams')
-                ->modalDescription('Are you sure you want to reset all questions\' teams? This action cannot be undone.')
+                ->modalHeading('Delete All Questions')
+                ->modalDescription('Are you sure you want to delete all questions? This action cannot be undone.')
                 ->modalSubmitActionLabel('Yes, reset all'),
         ];
     }
