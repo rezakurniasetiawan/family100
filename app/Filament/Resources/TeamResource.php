@@ -26,6 +26,12 @@ class TeamResource extends Resource
     {
         return 1;
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('type', 'user');
+    }
+    
     public static function form(Form $form): Form
     {
         return $form

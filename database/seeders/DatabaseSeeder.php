@@ -25,10 +25,11 @@ class DatabaseSeeder extends Seeder
 
         // create teams
         $teams = [
-            ['team_name' => 'Team 1'],
-            ['team_name' => 'Team 2'],
-            ['team_name' => 'Team 3'],
-            ['team_name' => 'Team 4'],
+            ['team_name' => 'Team 1', 'type' => 'user'],
+            ['team_name' => 'Team 2', 'type' => 'user'],
+            ['team_name' => 'Team 3', 'type' => 'user'],
+            ['team_name' => 'Team 4', 'type' => 'user'],
+            ['team_name' => 'System', 'type' => 'system'],
         ];
 
         foreach ($teams as $team) {
