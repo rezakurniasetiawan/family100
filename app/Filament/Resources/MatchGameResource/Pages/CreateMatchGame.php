@@ -60,7 +60,7 @@ class CreateMatchGame extends CreateRecord
                 Answer::where('id', $answerId)->update($updateQuestion);
                 $updateMatchGame = [
                     'information' => "System Autocorrect 1 question(s)",
-                    'answered' => 0,
+                    'answered' => 3,
                 ];
                 MatchGame::where('id', $data->id)->update($updateMatchGame);
             } else  if ($teamId == $system->id) {
@@ -73,7 +73,7 @@ class CreateMatchGame extends CreateRecord
 
                 $updateMatchGame = [
                     'information' => "System Autocorrect $count question(s)",
-                    'answered' => 0,
+                    'answered' => 3,
                 ];
                 MatchGame::where('id', $data->id)->update($updateMatchGame);
             } else {
