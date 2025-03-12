@@ -15,7 +15,7 @@ class MatchGameController extends Controller
      */
     public function general($id)
     {
-        $teams = Team::get();
+        $teams = Team::where('type', 'user')->get();
         $answers = Answer::where('question_id', $id)->get();
 
         return response()->json([
@@ -32,7 +32,7 @@ class MatchGameController extends Controller
 
     public function rangking()
     {
-        $teams = Team::orderBy('score', 'desc')->get();
+        $teams = Team::where('type', 'user')->orderBy('score', 'desc')->get();
         return response()->json([
             'teams' => $teams,
         ]);

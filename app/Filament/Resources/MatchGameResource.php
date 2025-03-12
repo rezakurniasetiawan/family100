@@ -7,6 +7,7 @@ use App\Filament\Resources\MatchGameResource\RelationManagers;
 use App\Models\Answer;
 use App\Models\MatchGame;
 use App\Models\Question;
+use App\Models\Team;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -28,6 +29,7 @@ class MatchGameResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $system = Team::where('type', 'system')->first();
         return $form
             ->schema([
                 Forms\Components\Section::make('Match Game')
@@ -36,21 +38,24 @@ class MatchGameResource extends Resource
                         Forms\Components\Select::make('team_id')
                             ->label('Team')
                             ->relationship('team', 'team_name')
-                            ->required(),
+                            ->required()
+                            ->live(),
                         Forms\Components\Select::make('question_id')
                             ->label('Question')
                             ->relationship('question', 'question')
                             ->searchable()
                             ->preload()
-                            ->live()
+                            // ->live()
                             ->required(),
                         Forms\Components\Select::make('answer_id')
                             ->label('Answered')
                             ->searchable()
                             ->preload()
+                            // ->reactive()
                             ->options(
                                 fn(callable $get) => Answer::where('question_id', $get('question_id'))->whereNull('team_id')->get()->pluck('answer', 'id')
                             ),
+                            // ->hidden(fn(callable $get) => empty($get('question_id')) || $get('team_id') == $system->id),
 
                     ]),
 
