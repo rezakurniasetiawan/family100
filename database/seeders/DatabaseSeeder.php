@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('password'),
-            // 'email' => 'wcuofficial@gmail.com',
-            // 'password' => bcrypt('4ku4n4kindonesi4'),
+            // 'email' => 'admin@gmail.com',
+            // 'password' => bcrypt('password'),
+            'email' => 'wcuofficial@gmail.com',
+            'password' => bcrypt('4ku4n4kindonesi4'),
         ]);
 
         // create teams
