@@ -9,10 +9,10 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\TeamResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\TeamResource\RelationManagers;
+use Filament\Notifications\Notification;
 
 class TeamResource extends Resource
 {
@@ -31,7 +31,7 @@ class TeamResource extends Resource
     {
         return parent::getEloquentQuery()->where('type', 'user');
     }
-    
+
     public static function form(Form $form): Form
     {
         return $form
@@ -74,6 +74,30 @@ class TeamResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('Reduce Score')
+                    ->button()
+                    ->requiresConfirmation()
+                    ->color('primary')
+                    ->modalHeading('Reduce Score')
+                    ->modalDescription('Enter the amount you want to reduce from this team\'s score.')
+                    ->modalSubmitActionLabel('Reduce')
+                    ->icon('heroicon-o-minus-circle')
+                    ->form([
+                        Forms\Components\TextInput::make('reduction')
+                            ->label('Score Reduction')
+                            ->numeric()
+                            ->minValue(1)
+                            ->required(),
+                    ])
+                    ->action(function ($record, array $data) {
+                        $record->decrement('score', $data['reduction']);
+                        Notification::make()
+                            ->success()
+                            ->title('Success')
+                            ->body('Score has been successfully reduced!')
+                            ->send();
+                    }),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
