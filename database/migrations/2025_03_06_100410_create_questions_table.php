@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('question');
-            $table->foreignId('segment_id')->nullable()->constrained('segments');
+            $table->foreignId('segment_id')->nullable()->constrained('segments')->onDelete('cascade');
             $table->timestamps();
         });
     }
